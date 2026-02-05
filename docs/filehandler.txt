@@ -1,0 +1,60 @@
+This document describes the design of FileHandler.
+
+Overarching responsibilities:
+
+-> Create a file handler class that handles a directory of files
+    1. Read the directory contents when requested
+-> Given a file return the contents to the caller
+    1. Given an identifier, locate the path
+        - Read and return the contents from the disk
+
+Important to note:
+    - When file contents are accessed as a stream, the caller is responsible for closing the stream after use.
+    - The filehandler is not responsible for assigning identifiers to files, command-line arguments, and console I/O
+
+Pseudocode:
+
+CLASS FileHandler {
+    private final Path dataDirectoryPath;
+
+    @Default
+    CONSTRUCTOR FileHandler() {
+        this([get default path of data]);
+    }
+
+    @Overloading
+    CONSTRUCTOR FileHandler(Path path) {
+        this.dataDirectoryPath = path;
+    }
+
+    Solve: Overarching idea: part 1
+    =========================================================================
+    List<Path> getFiles() {
+        if ([File is not a directory]):
+            throw an exception;
+
+        [attempt to read directory contents]:
+            return [filtered list of files];
+    }
+    =========================================================================
+
+    Solve: Overarching idea: part 2
+    =========================================================================
+    Stream<String> streamLines(String filename) throws exception {
+        Path file = findFile(filename);
+        return [stream of files by line];
+    }
+
+    String readFile(String filename) throws exception {
+        Path file = findFile(filename);
+        return [files as a String];
+    }
+
+    private Path findFile(String filename) throws exception {
+        Path file = [find file under directory];
+        if ([file is not a valid file]:
+            throw exception;
+        return file;
+    }
+    =========================================================================
+}
