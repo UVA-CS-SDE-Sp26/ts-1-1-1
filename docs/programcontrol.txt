@@ -1,0 +1,70 @@
+This document describes the design of ProgramControl.
+
+Overarching responsibilities:
+
+-> Connect the command line to the file handler
+    1. Request file contents and return readable text
+-> Given a valid file identifier return the contents to the caller in a String
+-> If not given a valid identifier return a comprehensive list of all files
+
+Important to note:
+    - The program immediately exits if the user does not type in an argument, instead of giving them another chance to select a file
+    - The user can only select files through the numerical index of the file, not the filename itself
+
+Pseudocode:
+
+CLASS TopSecret {
+
+    // Helper: convert a list of files to a numbered list for display
+    STATIC List<String> numberFiles(List<String> files) {
+        FOR each file in files:
+            prepend index with leading zeros (01, 02, 03…)
+        RETURN numbered list
+    }
+
+    // Helper: convert a list of Paths to a list of Strings
+    STATIC List<String> PathToString(List<Path> paths) {
+        FOR each Path p:
+            convert p to string
+        RETURN list of strings
+    }
+
+    // Validate command-line argument
+    STATIC int checkCommandArgument(String command) {
+        TRY parse command to integer:
+            IF integer < 0:
+                THROW RuntimeException("Invalid choice")
+            RETURN integer
+        CATCH NumberFormatException:
+            THROW RuntimeException("Invalid input: must be integer")
+    }
+
+    // MAIN ENTRY POINT
+    STATIC void main(String[] args) {
+        TRY:
+            FileHandler secretFileHandler = new FileHandler()
+
+            List<Path> filePath = secretFileHandler.getFiles()
+            List<String> stringFiles = PathToString(filePath)
+
+            IF args.length == 1:
+                int fileChoice = checkCommandArgument(args[0])
+
+                IF fileChoice >= stringFiles.size():
+                    THROW RuntimeException("Choice out of range")
+
+                // read file contents
+                String fileText = secretFileHandler.readFile(stringFiles.get(fileChoice))
+                PRINT fileText
+
+            ELSE:
+                // Print numbered file list
+                List<String> result = numberFiles(stringFiles)
+                FOR each string s in result:
+                    PRINT s
+
+        CATCH RuntimeException e:
+            PRINT "Fatal error: " + e.getMessage()
+            PRINT stack trace (optional)
+    }
+}
