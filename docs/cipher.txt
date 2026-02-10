@@ -1,2 +1,45 @@
-Ali Khokhar - Team Member D
-For the cipher, we need a testtest
+Ali Khokhar - Team 1.1
+Team Member D
+
+Overview:
+- The Cipher class creates objects that take in the name of a file
+- This file holds a key (two lines) that are used to decipher a ciphered string
+- My implementation:
+    - First I access the key file using the getCipherLines() method
+    - This method accesses the file and puts each line into an ArrayList
+    - After some validation, the lines from the ArrayList are taken out and put into separate strings
+    - Then, they are validated further
+    - Then, the createHashMap() method uses both of these strings as the key and value for a HashMap
+    - Then, the HashMap we have now created is used to decode a string inputted into the method
+        arguments of the decipherStringInput() method
+    - Finally, this method will output the deciphered version of the inputted string and now we have
+        accomplished the goal of his part of the homework
+
+Validation of Cipher Explanation:
+- When a cipher/key file is accessed, it is checked for:
+    - Having two lines
+    - Both lines having the same number of characters
+    - The Ciphered line having distinct characters so that one character does not map to two different values
+
+UML
+
+public class Cipher {
+
+ Instance Variables
+ ----------------------
+ + String keyFileName;
+ + File keyFile;
+ + String normalLetters;
+ + String cipheredLetters;
+ + ArrayList linesOfKeyFile
+ + HashMap keyLettersByIndex
+
+ ----------------------------------
+
+ public Cipher(String keyFileNameInput)
+
+ -----------------------------------
+
+ getCipherLines() : void
+ createHashMap() : void
+ decipherStringInput(String input) : String
