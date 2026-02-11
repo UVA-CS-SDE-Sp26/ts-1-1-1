@@ -50,6 +50,13 @@ public class ProgramControl {
         }
     }
 
+
+    public static List<String> ArrayOfFiles(FileHandler fileHandler) {
+
+        List<Path> filePath = fileHandler.getFiles();
+        return PathToString(filePath);
+    }
+
     public static void commandUtility(String[] arguments) {
         try {
             FileHandler secretFileHandler = new FileHandler();
@@ -70,16 +77,16 @@ public class ProgramControl {
                     throw new RuntimeException("Error reading file: " + stringFiles.get(fileChoice), e);
                 }
 
-                System.out.println(fileText);
+                //System.out.println(fileText);
             } else {
                 List<String> result = numberFiles(stringFiles);
                 for (String s : result) {
-                    System.out.println(s);
+                    //System.out.println(s);
                 }
             }
 
         } catch (RuntimeException e) {
-            System.out.println("Fatal error: " + e.getMessage());
+            //System.out.println("Fatal error: " + e.getMessage());
         }
 
     }
