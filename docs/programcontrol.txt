@@ -13,58 +13,57 @@ Important to note:
 
 Pseudocode:
 
-CLASS TopSecret {
+Class TopSecret {
 
     // Helper: convert a list of files to a numbered list for display
-    STATIC List<String> numberFiles(List<String> files) {
-        FOR each file in files:
-            prepend index with leading zeros (01, 02, 03…)
-        RETURN numbered list
+    Static List<String> numberFiles(List<String> files) {
+        For each file in files:
+            append index with leading zeros (01, 02, 03…)
+        return numbered list
     }
 
     // Helper: convert a list of Paths to a list of Strings
-    STATIC List<String> PathToString(List<Path> paths) {
-        FOR each Path p:
+    Static List<String> PathToString(List<Path> paths) {
+        For each Path p:
             convert p to string
-        RETURN list of strings
+        return a list of strings
     }
 
     // Validate command-line argument
-    STATIC int checkCommandArgument(String command) {
-        TRY parse command to integer:
-            IF integer < 0:
-                THROW RuntimeException("Invalid choice")
-            RETURN integer
-        CATCH NumberFormatException:
-            THROW RuntimeException("Invalid input: must be integer")
+    Static int checkCommandArgument(String command) {
+        Try:
+            If integer < 0:
+                Throw RuntimeException("Invalid choice")
+            return integer
+        Catch NumberFormatException:
+            Throw RuntimeException("Invalid input: must be integer")
     }
 
-    // MAIN ENTRY POINT
-    STATIC void main(String[] args) {
-        TRY:
+    // Synthesize Command Utility
+    Static void main(String[] args) {
+        Try:
             FileHandler secretFileHandler = new FileHandler()
 
             List<Path> filePath = secretFileHandler.getFiles()
             List<String> stringFiles = PathToString(filePath)
 
-            IF args.length == 1:
+            if args.length == 1:
                 int fileChoice = checkCommandArgument(args[0])
 
-                IF fileChoice >= stringFiles.size():
-                    THROW RuntimeException("Choice out of range")
+                if fileChoice >= stringFiles.size():
+                    Throw RuntimeException("Choice out of range")
 
                 // read file contents
                 String fileText = secretFileHandler.readFile(stringFiles.get(fileChoice))
-                PRINT fileText
+                print fileText
 
-            ELSE:
-                // Print numbered file list
+            else:
+                // Print numbered list of files
                 List<String> result = numberFiles(stringFiles)
-                FOR each string s in result:
-                    PRINT s
+                for each string s in result:
+                    print s
 
-        CATCH RuntimeException e:
-            PRINT "Fatal error: " + e.getMessage()
-            PRINT stack trace (optional)
+        catch RuntimeException e:
+            print "Fatal error: " + e.getMessage()
     }
 }
