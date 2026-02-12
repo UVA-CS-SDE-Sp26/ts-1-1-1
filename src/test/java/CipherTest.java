@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -41,7 +42,9 @@ public class CipherTest {
             System.out.println("IO Exception");
         }
 
-        Cipher c = new Cipher("testfile1.txt");
+        //Creating a path object variable
+        Path path = Paths.get("testfile1.txt");
+        Cipher c = new Cipher(path);
 
         assertEquals('A', c.keyLettersByIndex.get('C'), "Should output A as the matching letter for C");
     }
@@ -55,7 +58,8 @@ public class CipherTest {
             System.out.println("IO Exception");
         }
 
-        assertThrows(IllegalArgumentException.class, () -> {new Cipher("testfile2.txt");}, "Should throw illegal argument error");
+        Path path = Paths.get("testfile2.txt");
+        assertThrows(IllegalArgumentException.class, () -> {new Cipher(path);}, "Should throw illegal argument error");
     }
 
     @Test
@@ -67,7 +71,8 @@ public class CipherTest {
             System.out.println("IO Exception");
         }
 
-        assertThrows(IllegalArgumentException.class, () -> {new Cipher("testfile3.txt");}, "Should throw illegal argument error");
+        Path path = Paths.get("testfile3.txt");
+        assertThrows(IllegalArgumentException.class, () -> {new Cipher(path);}, "Should throw illegal argument error");
     }
 
     @Test
@@ -79,19 +84,21 @@ public class CipherTest {
             System.out.println("IO Exception");
         }
 
-        assertThrows(IllegalArgumentException.class, () -> {new Cipher("testfile4.txt");}, "Should throw illegal argument error");
+        Path path = Paths.get("testfile4.txt");
+        assertThrows(IllegalArgumentException.class, () -> {new Cipher(path);}, "Should throw illegal argument error");
     }
 
     @Test
     void getCipherLinesFileNotFound() {
         try {
-            createTestFiles("testfile4.txt", "ABC", "CBB");
+            createTestFiles("testfile5.txt", "ABC", "CBB");
         }
         catch (IOException e) {
             System.out.println("IO Exception");
         }
 
-        assertThrows(IllegalArgumentException.class, () -> {new Cipher("fileNotFound.txt");}, "Should throw illegal argument error");
+        Path path = Paths.get("testfile5.txt");
+        assertThrows(IllegalArgumentException.class, () -> {new Cipher(path);}, "Should throw illegal argument error");
     }
 
 
@@ -99,13 +106,14 @@ public class CipherTest {
     @Test
     void createHashMapTypicalUsage() {
         try {
-            createTestFiles("testfile5.txt", "ABC", "CBA");
+            createTestFiles("testfile6.txt", "ABC", "CBA");
         }
         catch (IOException e) {
             System.out.println("IO Exception");
         }
 
-        Cipher c = new Cipher("testfile5.txt");
+        Path path = Paths.get("testfile6.txt");
+        Cipher c = new Cipher(path);
 
         assertTrue(c.keyLettersByIndex.containsValue('A'), "Should say True");
         assertTrue(c.keyLettersByIndex.containsValue('B'), "Should say True");
@@ -118,13 +126,14 @@ public class CipherTest {
     @Test
     void createHashMapWrong() {
         try {
-            createTestFiles("testfile6.txt", "ABC", "CBA");
+            createTestFiles("testfile7.txt", "ABC", "CBA");
         }
         catch (IOException e) {
             System.out.println("IO Exception");
         }
 
-        Cipher c = new Cipher("testfile6.txt");
+        Path path = Paths.get("testfile7.txt");
+        Cipher c = new Cipher(path);
 
         assertFalse(c.keyLettersByIndex.containsValue('D'), "Should say True");
         assertFalse(c.keyLettersByIndex.containsValue('E'), "Should say True");
@@ -138,13 +147,14 @@ public class CipherTest {
     @Test
     void decipherStringInputTypicalUsage() {
         try {
-            createTestFiles("testfile7.txt", "NOO", "YES");
+            createTestFiles("testfile8.txt", "NOO", "YES");
         }
         catch (IOException e) {
             System.out.println("IO Exception");
         }
 
-            Cipher c = new Cipher("testfile7.txt");
+            Path path = Paths.get("testfile8.txt");
+            Cipher c = new Cipher(path);
 
             assertEquals("NOO", c.decipherStringInput("YES"), "Should output NOO");
     }
@@ -152,13 +162,14 @@ public class CipherTest {
     @Test
     void decipherStringInputWithSpaces() {
         try {
-            createTestFiles("testfile7.txt", "NOO", "YES");
+            createTestFiles("testfile9.txt", "NOO", "YES");
         }
         catch (IOException e) {
             System.out.println("IO Exception");
         }
 
-        Cipher c = new Cipher("testfile7.txt");
+        Path path = Paths.get("testfile9.txt");
+        Cipher c = new Cipher(path);
 
         assertEquals("NOO ONOO", c.decipherStringInput("YES EYES"), "Should output NOO");
     }

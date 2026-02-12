@@ -1,7 +1,8 @@
 public class TopSecret {
 
     public static void main(String[] args) {
-        UserInterface userinterface = new UserInterface();
+        FileHandler filehandler = new FileHandler();
+        UserInterface userinterface = new UserInterface(filehandler);
         userinterface.run(args);
     }
 }
