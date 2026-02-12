@@ -15,6 +15,14 @@ Overview:
     - Finally, this method will output the deciphered version of the inputted string and now we have
         accomplished the goal of his part of the homework
 
+- Usage
+    - The way my class will be used by another file:
+        - Create an object of my class by passing the cipher file (key.txt or an alternate)
+            - Cipher c = new Cipher(key.txt);
+        - Now use the decipherStringInput method which takes a ciphered string and outputs the deciphered version
+            - String decipheredString = c.decipherStringInput(cipheredString);
+
+
 Validation of Cipher Explanation:
 - When a cipher/key file is accessed, it is checked for:
     - Having two lines
