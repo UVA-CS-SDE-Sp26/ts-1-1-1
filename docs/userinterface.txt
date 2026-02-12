@@ -1,0 +1,40 @@
+Gyeom Park - Team 1.1
+Team Member A
+
+Overview:
+UserInterface.java is the command-line interface controller for the TopSecret program.
+It acts as the entry point for user interaction and coordinates communication between ProgramControl, FileHandler, and Cipher classes.
+
+Given no argument, it lists all files in the directory.
+Given the file number, it reads the file contents using the default key.
+Given the file number AND key file name, it reads the file contents using the specified key.
+
+Displays error messages if:
+    file number is invalid
+    file is not found
+    key file is invalid
+    any other runtime exceptions
+
+Pseudocode:
+
+    when no args
+    	list files
+    else
+    	fileNum = args[1]
+    	cipherKey = default key
+    	if second arg
+    		cipherKey = args[2]
+    	if third args
+    		error message: only 2 args allowed
+
+    	display file contents using fileNum + cipherKey
+
+UML:
+------------------------------------------------------
+UserInterface
+------------------------------------------------------
+
+------------------------------------------------------
++ run(args: String[]): void
+- printFiles(list: List<String>) : void
+- numToFIleName(num: int, list: List<String>) : String
