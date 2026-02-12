@@ -3,10 +3,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class UserInterface {
+    private final FileHandler filehandler;
 
+    public UserInterface(FileHandler filehandler){
+        this.filehandler = filehandler;
+    }
     public void run(String[] args) {
-            //ProgramControl program = new ProgramControl();
-            FileHandler filehandler = new FileHandler();
             try{
                 List<String> fileList = ProgramControl.ArrayOfFiles(filehandler);
                 if (args.length == 0) {
@@ -32,13 +34,13 @@ public class UserInterface {
 
     }
 
-    private void printFiles(List<String> list) {
+    public void printFiles(List<String> list) {
         for (String line : list) {
             System.out.println(line);
         }
     }
 
-    private String numToFileName(int num, List<String> list){
+    public String numToFileName(int num, List<String> list){
         return list.get(num-1);
     }
 
