@@ -17,10 +17,11 @@ public class Cipher {
     HashMap<Character, Character> keyLettersByIndex = new HashMap<>();
 
     //constructor
-    public Cipher(File keyFile) {
+    public Cipher(Path keyFilePath) {
         //keyFileName = keyFileNameInput;
         //keyFile = new File(this.keyFileName);
-        this.keyFile = keyFile;
+        //this.keyFile = keyFile;
+        keyFile = keyFilePath.toFile();
 
         //resetting if this object was used before
         normalLetters = "";
