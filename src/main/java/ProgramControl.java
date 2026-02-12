@@ -61,39 +61,4 @@ public class ProgramControl {
         return finalFiles;
     }
 
-
-    public static void commandUtility(String[] arguments) {
-        try {
-            FileHandler secretFileHandler = new FileHandler();
-            List<Path> filePath = secretFileHandler.getFiles();
-            List<String> stringFiles = PathToString(filePath);
-            if (arguments.length == 1) {
-                int fileChoice = checkCommandArgument(arguments[0]);
-                if (fileChoice >= stringFiles.size()) {
-                    throw new RuntimeException("Choice out of range. Must be 1 to " + (stringFiles.size() - 1));
-                }
-
-                String fileText;
-                try {
-                    fileText = secretFileHandler.readFile(stringFiles.get(fileChoice));
-                } catch (FileNotFoundException e) {
-                    throw new RuntimeException("File not found: " + stringFiles.get(fileChoice), e);
-                } catch (IOException e) {
-                    throw new RuntimeException("Error reading file: " + stringFiles.get(fileChoice), e);
-                }
-
-                //System.out.println(fileText);
-            } else {
-                List<String> result = numberFiles(stringFiles);
-                for (String s : result) {
-                    //System.out.println(s);
-                }
-            }
-
-        } catch (RuntimeException e) {
-            //System.out.println("Fatal error: " + e.getMessage());
-        }
-
-    }
-
 }
