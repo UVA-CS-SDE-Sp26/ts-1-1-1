@@ -54,8 +54,13 @@ public class ProgramControl {
     public static List<String> ArrayOfFiles(FileHandler fileHandler) {
 
         List<Path> filePath = fileHandler.getFiles();
-        return PathToString(filePath);
+        List<String> finalFiles = new ArrayList<>();
+        for (Path path : filePath){
+            finalFiles.add(String.valueOf(path.getFileName()));
+        }
+        return finalFiles;
     }
+
 
     public static void commandUtility(String[] arguments) {
         try {
