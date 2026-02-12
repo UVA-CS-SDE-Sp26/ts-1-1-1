@@ -1,3 +1,9 @@
+Enoch Tan - Team 1.1
+Team Member C
+Note: Commits made by Allie Hedgewing were made by me. Unfortunately,
+I was not able to alter my .gitconfig file to chage my name until recently from my fake identity.
+I will make sure to remedy this mistake for future tests.
+
 This document describes the design of ProgramControl.
 
 Overarching responsibilities:
@@ -39,6 +45,21 @@ Class TopSecret {
             Throw RuntimeException("Invalid input: must be integer")
     }
 
+    //Helper: turn an array of files into an arraylist given a FileHandler object
+    Static List<String> ArrayOfFiles(FileHandler fileHandler) {
+
+        List<Path> filePath = fileHandler.getFiles()
+        List<String> finalFiles = empty list
+
+        For each Path path in filePath:
+            extract file name from path
+            convert file name to String
+            add file name to finalFiles
+
+        return finalFiles
+    }
+
+
     // Synthesize Command Utility
     Static void main(String[] args) {
         Try:
@@ -66,4 +87,5 @@ Class TopSecret {
         catch RuntimeException e:
             print "Fatal error: " + e.getMessage()
     }
+    Note: This function was originally in ProgramControl before it was moved to the User Interface. I developed all of the functionality here
 }
