@@ -38,7 +38,4 @@ class ProgramControlTest {
     void testCheckCommandArgument() {
     }
 
-    @Test
-    void testCommandUtility() {
-    }
 }

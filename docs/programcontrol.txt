@@ -1,3 +1,9 @@
+Enoch Tan - Team 1.1
+Team Member C
+Note: Commits made by Allie Hedgewing were made by me. Unfortunately,
+I was not able to alter my .gitconfig file to chage my name until recently from my fake identity.
+I will make sure to remedy this mistake for future tests.
+
 This document describes the design of ProgramControl.
 
 Overarching responsibilities:
@@ -66,4 +72,5 @@ Class TopSecret {
         catch RuntimeException e:
             print "Fatal error: " + e.getMessage()
     }
+    Note: This function was originally in ProgramControl before it was moved to the User Interface. I developed all of the functionality here
 }
