@@ -28,14 +28,9 @@ public class UserInterface {
                     System.out.println("Up to 2 arguments allowed: [fileNumber] [keyFile]");
                 }
             }
-            catch (IndexOutOfBoundsException e){
-                System.out.println("error: file " + args[1] + " does not exist");
-            }
             catch (Exception e){
-                System.out.println("error: " + e.getMessage());
+                System.out.println("error: " + e.getMessage() + "\n\texiting...");
             }
-
-
     }
 
     public void printFiles(List<String> list) {
@@ -43,7 +38,10 @@ public class UserInterface {
             System.out.println(line);
         }
     }
-    public String numToFileName(int num, List<String> list){
+    public String numToFileName(int num, List<String> list) throws IndexOutOfBoundsException {
+        if (num > list.size() || num <= 0){
+            throw new IndexOutOfBoundsException("file " + num + " does not exist.");
+        }
         return list.get(num-1);
     }
 }

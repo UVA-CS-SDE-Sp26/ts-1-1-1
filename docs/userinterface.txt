@@ -4,6 +4,7 @@ Team Member A
 Overview:
 UserInterface.java is the command-line interface controller for the TopSecret program.
 It acts as the entry point for user interaction and coordinates communication between ProgramControl, FileHandler, and Cipher classes.
+Because of this implementation, it is more tightly coupled.
 
 Given no argument, it lists all files in the directory.
 Given the file number, it reads the file contents using the default key.
