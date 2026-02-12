@@ -19,7 +19,7 @@ public class UserInterface {
                         Cipher cipher = new Cipher(cipherKey);
                         System.out.println(cipher.decipherStringInput(content));
                 } else {
-                        System.out.println("Up to 2 arguments allowed: fileNumber keyFile");
+                    System.out.println("Up to 2 arguments allowed: fileNumber keyFile");
                 }
             }
             catch (Exception e){
