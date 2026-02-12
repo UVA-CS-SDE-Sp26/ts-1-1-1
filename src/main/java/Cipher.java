@@ -62,7 +62,7 @@ public class Cipher {
         }
         catch (FileNotFoundException e)
         {
-            throw new IllegalArgumentException("File not found");
+            throw new IllegalArgumentException("Cipher file not found");
         }
 
         //validating the key: making sure the two lines are equal (one to one)
