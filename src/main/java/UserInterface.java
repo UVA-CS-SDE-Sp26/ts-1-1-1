@@ -25,12 +25,16 @@ public class UserInterface {
 
                         System.out.println(cipher.decipherStringInput(content));
                 } else {
-                    System.out.println("Up to 2 arguments allowed: fileNumber keyFile");
+                    System.out.println("Up to 2 arguments allowed: [fileNumber] [keyFile]");
                 }
+            }
+            catch (IndexOutOfBoundsException e){
+                System.out.println("error: file " + args[1] + " does not exist");
             }
             catch (Exception e){
                 System.out.println("error: " + e.getMessage());
             }
+
 
     }
 
@@ -39,9 +43,7 @@ public class UserInterface {
             System.out.println(line);
         }
     }
-
     public String numToFileName(int num, List<String> list){
         return list.get(num-1);
     }
-
 }
