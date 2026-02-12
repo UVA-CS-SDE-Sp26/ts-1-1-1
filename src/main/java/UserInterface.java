@@ -8,7 +8,7 @@ public class UserInterface {
             try{
                 List<String> fileList = ProgramControl.ArrayOfFiles(filehandler);
                 if (args.length == 0) {
-                    printFiles(fileList);
+                    printFiles(ProgramControl.numberFiles(fileList));
                 } else if (args.length < 3) {
                         int fileNum = ProgramControl.checkCommandArgument(args[0]);
                         String cipherKey = "key.txt"; // default key
