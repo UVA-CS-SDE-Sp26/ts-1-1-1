@@ -1,4 +1,6 @@
 import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class UserInterface {
 
@@ -15,8 +17,10 @@ public class UserInterface {
                         if (args.length == 2) {
                             cipherKey = (args[1]);
                         }
+                        Path cipherKeyPath = Paths.get("ciphers",cipherKey);
                         String content = filehandler.readFile(numToFileName(fileNum,fileList));
-                        Cipher cipher = new Cipher(cipherKey);
+                        Cipher cipher = new Cipher(cipherKeyPath);
+
                         System.out.println(cipher.decipherStringInput(content));
                 } else {
                         System.out.println("Up to 2 arguments allowed: fileNumber keyFile");
