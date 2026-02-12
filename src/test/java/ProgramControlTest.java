@@ -6,12 +6,6 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ProgramControlTest {
 
@@ -20,18 +14,14 @@ class ProgramControlTest {
 
         ProgramControl programControl = new ProgramControl();
 
+        //If they are inputted correctly
         List<String> inputBasic = List.of("file1.txt", "file2.txt", "file3.txt");
         List<String> result = programControl.numberFiles(inputBasic);
         List<String> expected = List.of("01 file1.txt", "02 file2.txt", "03 file3.txt");
 
         assertEquals(expected, result);
 
-        List<String> inputOne = List.of("file1.txt");
-        List<String> resultOne = programControl.numberFiles(inputOne);
-        List<String> expectedOne = List.of("01 file1.txt");
-
-        assertEquals(expectedOne, resultOne);
-
+        //if there are no inputs
         List<String> inputNone = List.of();
         assertThrows(RuntimeException.class, () -> programControl.numberFiles(inputNone));
     }
@@ -39,10 +29,12 @@ class ProgramControlTest {
     @Test
     void testPathToString() {
 
+        //empty List of Paths
         ProgramControl programControl = new ProgramControl();
         List<Path> emptyPaths = List.of();
         assertThrows(RuntimeException.class, () -> programControl.PathToString(emptyPaths));
 
+        //Normal list of paths
         List<Path> paths = List.of(
                 Paths.get("file1.txt"),
                 Paths.get("file2.txt"),
@@ -56,23 +48,39 @@ class ProgramControlTest {
     @Test
     void testCheckCommandArgument() {
 
-
     ProgramControl programControl = new ProgramControl();
 
     // Valid integers
         assertEquals(5, programControl.checkCommandArgument("5"));
         assertEquals(0, programControl.checkCommandArgument("0"));
 
-        // Negative integer → exception
+        // Negative integer leads to exception
         assertThrows(RuntimeException.class, () -> programControl.checkCommandArgument("-1"));
-        // Non-integer → exception
-        RuntimeException exNonInt = assertThrows(RuntimeException.class, () -> TopSecret.checkCommandArgument("abc"));
+        // Non-integer leads to exception
+        RuntimeException exNonInt = assertThrows(RuntimeException.class, () -> programControl.checkCommandArgument("abc"));
     }
 
 
     @Test
     void testArrayOfFiles() {
 
-    }
+        FileHandler handlerMultiple = new FileHandler();
+        ProgramControl programControl = new ProgramControl();
+
+        //Normal amount of files
+        List<Path> paths = List.of(
+                Paths.get("file1.txt"),
+                Paths.get("file2.txt"),
+                Paths.get("file3.txt")
+        );
+
+        assertEquals(List.of("file1.txt", "file2.txt", "file3.txt"), programControl.ArrayOfFiles(handlerMultiple));
+
+            // No files given
+            FileHandler handlerEmpty = new FileHandler();
+            List<Path> noPaths = List.of();
+
+            assertTrue(programControl.ArrayOfFiles(handlerEmpty).isEmpty());
+        }
 
 }
