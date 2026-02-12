@@ -42,6 +42,7 @@ public class CipherTest {
             System.out.println("IO Exception");
         }
 
+        //Creating a path object variable
         Path path = Paths.get("testfile1.txt");
         Cipher c = new Cipher(path);
 
