@@ -13,3 +13,4 @@ IMPORTANT FILE CONTENTS:
 - ts-1-1-1\data contains the files for display
 - ts-1-1-1\ciphers contains the cipher keys used to display the files.
     -key.txt is the default cipher key if no key is specified.
+- ts-1-1-1 also contains our .class files --> these are crucial for running the program from the top level directory
