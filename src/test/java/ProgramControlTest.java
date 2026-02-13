@@ -1,13 +1,22 @@
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 class ProgramControlTest {
+
+    // Create a temporary directory
+    @TempDir
+    Path testDir;
 
     @Test
     void testNumberFiles() {
@@ -62,25 +71,23 @@ class ProgramControlTest {
 
 
     @Test
-    void testArrayOfFiles() {
+    void testArrayOfFiles() throws IOException {
 
-        FileHandler handlerMultiple = new FileHandler();
-        ProgramControl programControl = new ProgramControl();
+        //Normal filehandlers
+        Files.createFile(testDir.resolve("file1.txt"));
+        Files.createFile(testDir.resolve("file2.txt"));
+        Files.createFile(testDir.resolve("file3.txt"));
 
-        //Normal amount of files
-        List<Path> paths = List.of(
-                Paths.get("file1.txt"),
-                Paths.get("file2.txt"),
-                Paths.get("file3.txt")
-        );
+        FileHandler fileHandler = new FileHandler(testDir);
+        List<String> result = ProgramControl.ArrayOfFiles(fileHandler);
+        assertEquals(List.of("file1.txt", "file2.txt", "file3.txt"),  result);
 
-        assertEquals(List.of("file1.txt", "file2.txt", "file3.txt"), programControl.ArrayOfFiles(handlerMultiple));
+        //Empty Filehandlers
+        Path emptyDir = Files.createTempDirectory("emptyTestDir");
+        FileHandler emptyHandler = new FileHandler(emptyDir);
+        List<String> resultEmpty = ProgramControl.ArrayOfFiles(emptyHandler);
 
-            // No files given
-            FileHandler handlerEmpty = new FileHandler();
-            List<Path> noPaths = List.of();
-
-            assertTrue(programControl.ArrayOfFiles(handlerEmpty).isEmpty());
-        }
+        assertTrue(resultEmpty.isEmpty());
+    }
 
 }

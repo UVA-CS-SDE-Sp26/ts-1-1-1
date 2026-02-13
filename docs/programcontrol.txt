@@ -87,5 +87,5 @@ Class TopSecret {
         catch RuntimeException e:
             print "Fatal error: " + e.getMessage()
     }
-    Note: This function was originally in ProgramControl before it was moved to the User Interface. I developed all of the functionality here
+    Note: This function was originally in ProgramControl before it was moved to the User Interface, and then edited accordingly. I developed all of the functionality here
 }
