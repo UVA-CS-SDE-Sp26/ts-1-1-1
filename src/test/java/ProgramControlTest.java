@@ -1,8 +1,6 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,7 +39,7 @@ class ProgramControlTest {
         //empty List of Paths
         ProgramControl programControl = new ProgramControl();
         List<Path> emptyPaths = List.of();
-        assertThrows(RuntimeException.class, () -> programControl.PathToString(emptyPaths));
+        assertThrows(RuntimeException.class, () -> programControl.pathToString(emptyPaths));
 
         //Normal list of paths
         List<Path> paths = List.of(
@@ -50,7 +48,7 @@ class ProgramControlTest {
                 Paths.get("file3.txt")
         );
 
-        List<String> result = ProgramControl.PathToString(paths);
+        List<String> result = ProgramControl.pathToString(paths);
         assertEquals(List.of("file1.txt", "file2.txt", "file3.txt"), result);
     }
 

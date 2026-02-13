@@ -8,6 +8,7 @@ public class UserInterface {
     public UserInterface(FileHandler filehandler){
         this.filehandler = filehandler;
     }
+
     public void run(String[] args) {
             try{
                 List<String> fileList = ProgramControl.ArrayOfFiles(filehandler);
@@ -38,20 +39,21 @@ public class UserInterface {
             System.out.println(line);
         }
     }
+
     public String numToFileName(int num, List<String> list) throws IndexOutOfBoundsException {
-
         //Gyeom's original code
-      if (num > list.size() || num <= 0){
-          throw new IndexOutOfBoundsException("file " + num + " does not exist.");
-      }
-      return list.get(num-1);
+        if (num > list.size() || num <= 0){
+            throw new IndexOutOfBoundsException("file " + num + " does not exist.");
+        }
+        return list.get(num-1);
 
-        //potential code to help the index out of bounds issue - Ali
-//        try {
-//            return list.get(num-1);
-//        } catch (IndexOutOfBoundsException e) {
-//            throw new IndexOutOfBoundsException("File 0" + num + " does not exist.");
-//        }
-
+        /*
+        potential code to help the index out of bounds issue - Ali
+        try {
+            return list.get(num-1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("File 0" + num + " does not exist.");
+        }
+        */
     }
 }

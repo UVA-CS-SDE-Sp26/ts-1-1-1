@@ -8,7 +8,6 @@ import java.util.stream.Stream;
 
 /**
  * Responsible for all direct access to files
- * See filehandler.txt located at docs/filehandler.txt for more details.
  */
 public class FileHandler {
     private final Path dataDir;

@@ -1,8 +1,8 @@
-public class TopSecret {
-
-    public static void main(String[] args) {
-        FileHandler filehandler = new FileHandler();
-        UserInterface userinterface = new UserInterface(filehandler);
-        userinterface.run(args);
-    }
+/**
+ *  See the docs directory located under project root for project details.
+ */
+void main(String[] args) {
+    FileHandler filehandler = new FileHandler();
+    UserInterface ui = new UserInterface(filehandler);
+    ui.run(args);
 }

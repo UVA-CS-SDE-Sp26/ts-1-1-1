@@ -2,36 +2,22 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
-import java.util.ArrayList;
-
-import java.util.stream.Stream;
-
-//Handling command line arguments and the various inputs by the user
-
+/**
+ * Handling command line arguments and the various inputs by the user
+ */
 public class ProgramControl {
-
     public static List<String> numberFiles(List<String> files) throws RuntimeException { //Given a String List of files, returns an indexed String list of files
-        List<String> indexing = new ArrayList<String>();
-        if (files.isEmpty()) {
-            throw new RuntimeException("No files found to index: list of files must be 0 or greater");
-        }
+        List<String> indexedList = new ArrayList<String>();
+        if (files.isEmpty()) throw new RuntimeException("No files found to index.");
         for (int x = 0; x < files.size(); x++) {
-            indexing.add(String.format("%02d %s", x + 1, files.get(x))); //add formatted indexes to each file, i.e. 01, 02, 03
+            indexedList.add(String.format("%02d %s", x + 1, files.get(x))); //add formatted indexes to each file, i.e. 01, 02, 03
         }
-        return indexing;
+        return indexedList;
     }
 
-    public static List<String> PathToString(List<Path> paths) {
+    public static List<String> pathToString(List<Path> paths) {
         List<String> pathStrings = new ArrayList<>();
-        if (paths.isEmpty()) {
-            throw new RuntimeException("No paths found to convert into strings");
-        }
+        if (paths.isEmpty()) throw new RuntimeException("No files found to index.");
         for (Path p: paths) {
             pathStrings.add(p.toString());
         }
@@ -50,15 +36,12 @@ public class ProgramControl {
         }
     }
 
-
     public static List<String> ArrayOfFiles(FileHandler fileHandler) {
-
         List<Path> filePath = fileHandler.getFiles();
         List<String> finalFiles = new ArrayList<>();
-        for (Path path : filePath){
+        for (Path path : filePath) {
             finalFiles.add(String.valueOf(path.getFileName()));
         }
         return finalFiles;
     }
-
 }
