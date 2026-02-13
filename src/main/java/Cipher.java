@@ -102,5 +102,4 @@ public class Cipher {
 
         return decipheredString.toString();
     }
-
 }

@@ -2,32 +2,35 @@
 //Team Member D
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
 
-import java.io.FileNotFoundException;
+import javax.swing.*;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CipherTest {
 
+    Path dirPath = FileSystems.getDefault().getPath("src", "test", "cipher_test_files");
     //helper method to create test files
     private void createTestFiles(String fileName, String line1, String line2) throws IOException {
-        FileWriter writer = new FileWriter(fileName);
+        Path path = dirPath.resolve(fileName);
+        Files.createFile(path);
+        FileWriter writer = new FileWriter(path.toFile());
         writer.write(line1);
         writer.write("\n" + line2);
         writer.close();
     }
     //helper method to create test files with only one line
     private void createTestFiles(String fileName, String line1) throws IOException {
-        FileWriter writer = new FileWriter(fileName);
+        Path path = dirPath.resolve(fileName);
+        Files.createFile(path);
+        FileWriter writer = new FileWriter(path.toFile());
         writer.write(line1);
         writer.close();
     }
@@ -43,7 +46,7 @@ public class CipherTest {
         }
 
         //Creating a path object variable
-        Path path = Paths.get("testfile1.txt");
+        Path path = dirPath.resolve("testfile1.txt");
         Cipher c = new Cipher(path);
 
         assertEquals('A', c.keyLettersByIndex.get('C'), "Should output A as the matching letter for C");
@@ -58,7 +61,7 @@ public class CipherTest {
             System.out.println("IO Exception");
         }
 
-        Path path = Paths.get("testfile2.txt");
+        Path path = dirPath.resolve("testfile2.txt");
         assertThrows(IllegalArgumentException.class, () -> {new Cipher(path);}, "Should throw illegal argument error");
     }
 
@@ -71,7 +74,7 @@ public class CipherTest {
             System.out.println("IO Exception");
         }
 
-        Path path = Paths.get("testfile3.txt");
+        Path path = dirPath.resolve("testfile3.txt");
         assertThrows(IllegalArgumentException.class, () -> {new Cipher(path);}, "Should throw illegal argument error");
     }
 
@@ -84,7 +87,7 @@ public class CipherTest {
             System.out.println("IO Exception");
         }
 
-        Path path = Paths.get("testfile4.txt");
+        Path path = dirPath.resolve("testfile4.txt");
         assertThrows(IllegalArgumentException.class, () -> {new Cipher(path);}, "Should throw illegal argument error");
     }
 
@@ -97,7 +100,7 @@ public class CipherTest {
             System.out.println("IO Exception");
         }
 
-        Path path = Paths.get("testfile5.txt");
+        Path path = dirPath.resolve("testfile5.txt");
         assertThrows(IllegalArgumentException.class, () -> {new Cipher(path);}, "Should throw illegal argument error");
     }
 
@@ -112,7 +115,7 @@ public class CipherTest {
             System.out.println("IO Exception");
         }
 
-        Path path = Paths.get("testfile6.txt");
+        Path path = dirPath.resolve("testfile6.txt");
         Cipher c = new Cipher(path);
 
         assertTrue(c.keyLettersByIndex.containsValue('A'), "Should say True");
@@ -132,7 +135,7 @@ public class CipherTest {
             System.out.println("IO Exception");
         }
 
-        Path path = Paths.get("testfile7.txt");
+        Path path = dirPath.resolve("testfile7.txt");
         Cipher c = new Cipher(path);
 
         assertFalse(c.keyLettersByIndex.containsValue('D'), "Should say True");
@@ -153,7 +156,7 @@ public class CipherTest {
             System.out.println("IO Exception");
         }
 
-            Path path = Paths.get("testfile8.txt");
+            Path path = dirPath.resolve("testfile8.txt");
             Cipher c = new Cipher(path);
 
             assertEquals("NOO", c.decipherStringInput("YES"), "Should output NOO");
@@ -168,7 +171,7 @@ public class CipherTest {
             System.out.println("IO Exception");
         }
 
-        Path path = Paths.get("testfile9.txt");
+        Path path = dirPath.resolve("testfile9.txt");
         Cipher c = new Cipher(path);
 
         assertEquals("NOO ONOO", c.decipherStringInput("YES EYES"), "Should output NOO");

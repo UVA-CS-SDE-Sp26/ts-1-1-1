@@ -29,7 +29,7 @@ public class UserInterface {
                 }
             }
             catch (Exception e){
-                System.out.println("error: " + e.getMessage() + "\n\texiting...");
+                System.out.println("error: " + e.getMessage() + "\nexiting...");
             }
     }
 
